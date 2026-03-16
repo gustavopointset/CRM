@@ -262,11 +262,11 @@ function ContactForm({ contact, onSave, onCancel }) {
     passReason: "", objectionCategory: "", recurringQuestions: "", missingProof: "", perceivedRisks: "", whatMovedForward: "", contentResonated: "", passType: ""
   });
   const s = (k, v) => sf(p => ({ ...p, [k]: v }));
-  const G = ({ children }) => <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>{children}</div>;
+  const gs = { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 };
 
   return <div>
     <Section title="Identity" defaultOpen={true}>
-      <G>
+      <div style={gs}>
         <Inp label="Name *" value={f.name} onChange={e => s("name", e.target.value)} placeholder="Full name" />
         <Inp label="Company / Fund" value={f.company} onChange={e => s("company", e.target.value)} />
         <Inp label="Title / Role" value={f.title} onChange={e => s("title", e.target.value)} />
@@ -277,12 +277,12 @@ function ContactForm({ contact, onSave, onCancel }) {
         <Inp label="Source of Lead" value={f.source} onChange={e => s("source", e.target.value)} placeholder="Who introduced / how found" />
         <Inp label="Fund URL" value={f.fundUrl} onChange={e => s("fundUrl", e.target.value)} />
         <Inp label="Internal Owner" value={f.owner} onChange={e => s("owner", e.target.value)} />
-      </G>
+      </div>
       <div style={{ marginTop: 8 }}><Inp label="Tags (comma separated)" value={f.tags} onChange={e => s("tags", e.target.value)} placeholder="prediction-markets, vc, fintech..." /></div>
     </Section>
 
     <Section title="Investor Fit" defaultOpen={!contact}>
-      <G>
+      <div style={gs}>
         <Sel label="Tier" options={TIERS} value={f.tier} onChange={e => s("tier", e.target.value)} />
         <Sel label="Priority" options={["High", "Medium", "Low"]} value={f.priority} onChange={e => s("priority", e.target.value)} />
         <Sel label="Lead vs Follow" options={LEAD_FOLLOW} value={f.leadFollow} onChange={e => s("leadFollow", e.target.value)} />
@@ -293,16 +293,16 @@ function ContactForm({ contact, onSave, onCancel }) {
         <Inp label="Invests in Our Category?" value={f.investsInCategory} onChange={e => s("investsInCategory", e.target.value)} placeholder="Yes / No / Unknown" />
         <Inp label="Pace of Process" value={f.paceOfProcess} onChange={e => s("paceOfProcess", e.target.value)} placeholder="Fast / Slow / Seasonal" />
         <Inp label="Ownership Target" value={f.ownershipTarget} onChange={e => s("ownershipTarget", e.target.value)} />
-      </G>
+      </div>
     </Section>
 
     <Section title="Relationship" defaultOpen={false}>
-      <G>
+      <div style={gs}>
         <Inp label="Warm Intro Path" value={f.introPath} onChange={e => s("introPath", e.target.value)} placeholder="Via [Name]..." />
         <Inp label="Who Knows Them (team)" value={f.teamContact} onChange={e => s("teamContact", e.target.value)} />
         <Inp label="Mutual Contacts" value={f.mutualContacts} onChange={e => s("mutualContacts", e.target.value)} />
         <Inp label="What They Respond To" value={f.whatTheyRespondTo} onChange={e => s("whatTheyRespondTo", e.target.value)} />
-      </G>
+      </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
         <Txt label="What They Care About" value={f.whatTheyCare} onChange={e => s("whatTheyCare", e.target.value)} />
         <Txt label="Concerns / Objections" value={f.concernsObjections} onChange={e => s("concernsObjections", e.target.value)} />
@@ -312,7 +312,7 @@ function ContactForm({ contact, onSave, onCancel }) {
     </Section>
 
     <Section title="Pipeline" defaultOpen={!!contact}>
-      <G>
+      <div style={gs}>
         <Sel label="Stage" options={STAGES} value={f.stage} onChange={e => s("stage", e.target.value)} />
         <Sel label="Confidence" options={CONFIDENCE} value={f.confidence} onChange={e => s("confidence", e.target.value)} />
         <Inp label="Stage Entry Date" type="date" value={f.stageEntryDate} onChange={e => s("stageEntryDate", e.target.value)} />
@@ -323,7 +323,7 @@ function ContactForm({ contact, onSave, onCancel }) {
         <Inp label="# Meetings" type="number" value={f.meetingCount} onChange={e => s("meetingCount", e.target.value)} />
         <Inp label="Expected Check ($)" type="number" value={f.expectedCheck} onChange={e => s("expectedCheck", e.target.value)} />
         <Inp label="Timing" value={f.timingLikelihood} onChange={e => s("timingLikelihood", e.target.value)} placeholder="Q2 2026, 3-6mo..." />
-      </G>
+      </div>
       <div style={{ display: "flex", gap: 16, marginTop: 10 }}>
         <Chk label="Data Room Shared" checked={f.dataRoomShared} onChange={e => s("dataRoomShared", e.target.checked)} />
         <Chk label="Follow-Up Sent" checked={f.followUpSent} onChange={e => s("followUpSent", e.target.checked)} />
@@ -331,11 +331,11 @@ function ContactForm({ contact, onSave, onCancel }) {
     </Section>
 
     <Section title="Learning Loop" defaultOpen={false}>
-      <G>
+      <div style={gs}>
         <Sel label="Pass Reason" options={["(none)", ...PASS_REASONS]} value={f.passReason} onChange={e => s("passReason", e.target.value === "(none)" ? "" : e.target.value)} />
         <Sel label="Pass Type" options={["(none)", "Not now (revisit)", "Never"]} value={f.passType} onChange={e => s("passType", e.target.value === "(none)" ? "" : e.target.value)} />
         <Inp label="Objection Category" value={f.objectionCategory} onChange={e => s("objectionCategory", e.target.value)} />
-      </G>
+      </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
         <Txt label="Recurring Questions" value={f.recurringQuestions} onChange={e => s("recurringQuestions", e.target.value)} />
         <Txt label="Missing Proof Requested" value={f.missingProof} onChange={e => s("missingProof", e.target.value)} />
@@ -356,20 +356,27 @@ function ContactForm({ contact, onSave, onCancel }) {
 // CONTACT DETAIL PAGE
 // ═══════════════════════════════════════════════════════════
 
-function Detail({ contact: c, interactions, onEdit, onDelete, onAddInt, onBack }) {
+function InfoRow({ label, value, color }) {
+  if (!value || value === "\u2014") return null;
+  return <div style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", borderBottom: `1px solid ${COL.borderSoft}` }}>
+    <span style={{ fontSize: "12px", color: COL.light }}>{label}</span>
+    <span style={{ fontSize: "12px", color: color || COL.text, fontWeight: 500, textAlign: "right", maxWidth: "60%" }}>{value}</span>
+  </div>;
+}
+
+function Detail({ contact: c, interactions, onEdit, onDelete, onAddInt, onBack, onUpdateNotes }) {
   const [showInt, setShowInt] = useState(false);
+  const [editingNotes, setEditingNotes] = useState(false);
+  const [noteDraft, setNoteDraft] = useState(c.notes || "");
+  const [editingCare, setEditingCare] = useState(false);
+  const [careDraft, setCareDraft] = useState(c.whatTheyCare || "");
+  const [editingObj, setEditingObj] = useState(false);
+  const [objDraft, setObjDraft] = useState(c.concernsObjections || "");
   const sorted = [...interactions].sort((a, b) => new Date(b.date) - new Date(a.date));
   const stale = dAgo(c.lastTouchDate);
   const tags = c.tags ? c.tags.split(",").map(t => t.trim()).filter(Boolean) : [];
   const warn = c.notes?.includes("⚠️") || c.company?.includes("⚠️");
   const sc = STAGE_COLOR(c.stage);
-
-  const Info = ({ label, value, color }) => value && value !== "—" ? (
-    <div style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", borderBottom: `1px solid ${COL.borderSoft}` }}>
-      <span style={{ fontSize: "12px", color: COL.light }}>{label}</span>
-      <span style={{ fontSize: "12px", color: color || COL.text, fontWeight: 500, textAlign: "right", maxWidth: "60%" }}>{value}</span>
-    </div>
-  ) : null;
 
   return <div>
     <button onClick={onBack} style={{ background: "none", border: "none", color: COL.pri, cursor: "pointer", fontSize: "12px", fontFamily: FONT, padding: 0, marginBottom: 16, fontWeight: 500 }}>← All contacts</button>
@@ -411,41 +418,63 @@ function Detail({ contact: c, interactions, onEdit, onDelete, onAddInt, onBack }
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
       <div style={{ background: COL.card, borderRadius: "10px", border: `1px solid ${COL.border}`, padding: "16px 20px" }}>
         <div style={{ fontSize: "13px", fontWeight: 600, color: COL.text, marginBottom: 10 }}>Pipeline</div>
-        <Info label="Stage" value={c.stage} color={sc} />
-        <Info label="Entry Date" value={fmtDY(c.stageEntryDate)} />
-        <Info label="Last Touch" value={c.lastTouchDate ? `${fmtD(c.lastTouchDate)} (${stale}d ago)` : null} color={stale > 7 ? COL.red : undefined} />
-        <Info label="Next Step" value={c.nextStep} color={COL.pri} />
-        <Info label="Due" value={fmtD(c.nextStepDue)} color={c.nextStepDue && new Date(c.nextStepDue) < new Date() ? COL.red : undefined} />
-        <Info label="Owner" value={c.nextStepOwner} />
-        <Info label="Meetings" value={c.meetingCount > 0 ? c.meetingCount : null} />
-        <Info label="Confidence" value={c.confidence !== "Unknown" ? c.confidence : null} />
-        <Info label="Expected Check" value={fmt$(c.expectedCheck)} color={COL.priText} />
-        <Info label="Timing" value={c.timingLikelihood} />
-        <Info label="Data Room" value={c.dataRoomShared ? "✓ Shared" : null} color={COL.green} />
-        <Info label="Follow-up" value={c.followUpSent ? "✓ Sent" : null} color={COL.green} />
+        <InfoRow label="Stage" value={c.stage} color={sc} />
+        <InfoRow label="Entry Date" value={fmtDY(c.stageEntryDate)} />
+        <InfoRow label="Last Touch" value={c.lastTouchDate ? `${fmtD(c.lastTouchDate)} (${stale}d ago)` : null} color={stale > 7 ? COL.red : undefined} />
+        <InfoRow label="Next Step" value={c.nextStep} color={COL.pri} />
+        <InfoRow label="Due" value={fmtD(c.nextStepDue)} color={c.nextStepDue && new Date(c.nextStepDue) < new Date() ? COL.red : undefined} />
+        <InfoRow label="Owner" value={c.nextStepOwner} />
+        <InfoRow label="Meetings" value={c.meetingCount > 0 ? c.meetingCount : null} />
+        <InfoRow label="Confidence" value={c.confidence !== "Unknown" ? c.confidence : null} />
+        <InfoRow label="Expected Check" value={fmt$(c.expectedCheck)} color={COL.priText} />
+        <InfoRow label="Timing" value={c.timingLikelihood} />
+        <InfoRow label="Data Room" value={c.dataRoomShared ? "✓ Shared" : null} color={COL.green} />
+        <InfoRow label="Follow-up" value={c.followUpSent ? "✓ Sent" : null} color={COL.green} />
       </div>
       <div style={{ background: COL.card, borderRadius: "10px", border: `1px solid ${COL.border}`, padding: "16px 20px" }}>
         <div style={{ fontSize: "13px", fontWeight: 600, color: COL.text, marginBottom: 10 }}>Fit & Relationship</div>
-        <Info label="Lead / Follow" value={c.leadFollow !== "Unknown" ? c.leadFollow : null} />
-        <Info label="Check Range" value={c.checkSizeMin || c.checkSizeMax ? `${fmt$(c.checkSizeMin)} – ${fmt$(c.checkSizeMax)}` : null} />
-        <Info label="Geo Fit" value={c.geoFit} />
-        <Info label="Sector Fit" value={c.sectorFit} />
-        <Info label="Pace" value={c.paceOfProcess} />
-        <Info label="Intro Path" value={c.introPath} color={COL.pri} />
-        <Info label="Team Contact" value={c.teamContact} />
-        <Info label="Source" value={c.source} />
-        <Info label="Category?" value={c.investsInCategory} />
+        <InfoRow label="Lead / Follow" value={c.leadFollow !== "Unknown" ? c.leadFollow : null} />
+        <InfoRow label="Check Range" value={c.checkSizeMin || c.checkSizeMax ? `${fmt$(c.checkSizeMin)} – ${fmt$(c.checkSizeMax)}` : null} />
+        <InfoRow label="Geo Fit" value={c.geoFit} />
+        <InfoRow label="Sector Fit" value={c.sectorFit} />
+        <InfoRow label="Pace" value={c.paceOfProcess} />
+        <InfoRow label="Intro Path" value={c.introPath} color={COL.pri} />
+        <InfoRow label="Team Contact" value={c.teamContact} />
+        <InfoRow label="Source" value={c.source} />
+        <InfoRow label="Category?" value={c.investsInCategory} />
       </div>
     </div>
 
-    {/* Notes / relationship intel */}
-    {(c.notes || c.whatTheyCare || c.concernsObjections) &&
+    {/* Notes / relationship intel — editable inline */}
       <div style={{ background: COL.card, borderRadius: "10px", border: `1px solid ${COL.border}`, padding: "16px 20px", marginBottom: 12 }}>
-        {c.notes && <><div style={{ fontSize: "11px", color: COL.light, fontWeight: 500, marginBottom: 3 }}>Notes</div><div style={{ fontSize: "13px", color: COL.mid, lineHeight: 1.6, whiteSpace: "pre-wrap", marginBottom: 10 }}>{c.notes}</div></>}
-        {c.whatTheyCare && <><div style={{ fontSize: "11px", color: COL.light, fontWeight: 500, marginBottom: 3 }}>What They Care About</div><div style={{ fontSize: "13px", color: COL.mid, lineHeight: 1.5, marginBottom: 10 }}>{c.whatTheyCare}</div></>}
-        {c.concernsObjections && <><div style={{ fontSize: "11px", color: COL.light, fontWeight: 500, marginBottom: 3 }}>Concerns / Objections</div><div style={{ fontSize: "13px", color: COL.mid, lineHeight: 1.5 }}>{c.concernsObjections}</div></>}
+        <div style={{ marginBottom: 10 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+            <span style={{ fontSize: "11px", color: COL.light, fontWeight: 500 }}>Notes</span>
+            {!editingNotes ? <Btn size="xs" onClick={() => { setNoteDraft(c.notes || ""); setEditingNotes(true); }}>Edit</Btn>
+              : <div style={{ display: "flex", gap: 4 }}><Btn size="xs" onClick={() => setEditingNotes(false)}>Cancel</Btn><Btn size="xs" variant="primary" onClick={() => { onUpdateNotes(c.id, { notes: noteDraft }); setEditingNotes(false); }}>Save</Btn></div>}
+          </div>
+          {editingNotes ? <textarea value={noteDraft} onChange={e => setNoteDraft(e.target.value)} style={{ ...iStyle, minHeight: 80, resize: "vertical", width: "100%" }} onFocus={e => e.target.style.borderColor = COL.pri} onBlur={e => e.target.style.borderColor = COL.border} />
+            : <div style={{ fontSize: "13px", color: c.notes ? COL.mid : COL.faint, lineHeight: 1.6, whiteSpace: "pre-wrap" }}>{c.notes || "No notes yet. Click Edit to add."}</div>}
+        </div>
+        <div style={{ marginBottom: 10 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+            <span style={{ fontSize: "11px", color: COL.light, fontWeight: 500 }}>What They Care About</span>
+            {!editingCare ? <Btn size="xs" onClick={() => { setCareDraft(c.whatTheyCare || ""); setEditingCare(true); }}>Edit</Btn>
+              : <div style={{ display: "flex", gap: 4 }}><Btn size="xs" onClick={() => setEditingCare(false)}>Cancel</Btn><Btn size="xs" variant="primary" onClick={() => { onUpdateNotes(c.id, { whatTheyCare: careDraft }); setEditingCare(false); }}>Save</Btn></div>}
+          </div>
+          {editingCare ? <textarea value={careDraft} onChange={e => setCareDraft(e.target.value)} style={{ ...iStyle, minHeight: 50, resize: "vertical", width: "100%" }} onFocus={e => e.target.style.borderColor = COL.pri} onBlur={e => e.target.style.borderColor = COL.border} />
+            : <div style={{ fontSize: "13px", color: c.whatTheyCare ? COL.mid : COL.faint, lineHeight: 1.5 }}>{c.whatTheyCare || "—"}</div>}
+        </div>
+        <div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+            <span style={{ fontSize: "11px", color: COL.light, fontWeight: 500 }}>Concerns / Objections</span>
+            {!editingObj ? <Btn size="xs" onClick={() => { setObjDraft(c.concernsObjections || ""); setEditingObj(true); }}>Edit</Btn>
+              : <div style={{ display: "flex", gap: 4 }}><Btn size="xs" onClick={() => setEditingObj(false)}>Cancel</Btn><Btn size="xs" variant="primary" onClick={() => { onUpdateNotes(c.id, { concernsObjections: objDraft }); setEditingObj(false); }}>Save</Btn></div>}
+          </div>
+          {editingObj ? <textarea value={objDraft} onChange={e => setObjDraft(e.target.value)} style={{ ...iStyle, minHeight: 50, resize: "vertical", width: "100%" }} onFocus={e => e.target.style.borderColor = COL.pri} onBlur={e => e.target.style.borderColor = COL.border} />
+            : <div style={{ fontSize: "13px", color: c.concernsObjections ? COL.mid : COL.faint, lineHeight: 1.5 }}>{c.concernsObjections || "—"}</div>}
+        </div>
       </div>
-    }
 
     {/* Pass info */}
     {c.passReason && <div style={{ background: COL.redSoft, borderRadius: "10px", border: `1px solid ${COL.red}20`, padding: "14px 18px", marginBottom: 12 }}>
@@ -492,29 +521,43 @@ function IntForm({ contactId, onSave, onCancel }) {
 // PIPELINE (Kanban) — simplified
 // ═══════════════════════════════════════════════════════════
 
-function Pipeline({ contacts, onSelect }) {
+function Pipeline({ contacts, onSelect, onStageChange }) {
+  const [dragId, setDragId] = useState(null);
+  const [dragOver, setDragOver] = useState(null);
   const byStage = useMemo(() => {
     const m = {}; STAGES.forEach(s => m[s] = []);
     contacts.forEach(c => { if (m[c.stage]) m[c.stage].push(c) });
     return m;
   }, [contacts]);
 
+  const handleDragStart = (e, contactId) => { setDragId(contactId); e.dataTransfer.effectAllowed = "move"; };
+  const handleDragEnd = () => { setDragId(null); setDragOver(null); };
+  const handleDragOver = (e, stage) => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; setDragOver(stage); };
+  const handleDragLeave = () => { setDragOver(null); };
+  const handleDrop = (e, stage) => { e.preventDefault(); setDragOver(null); if (dragId) { onStageChange(dragId, stage); setDragId(null); } };
+
   return <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: 8 }}>
     {STAGES.map(stage => {
       const sc = STAGE_COLOR(stage);
       const items = byStage[stage];
-      if (items.length === 0) return <div key={stage} style={{ flex: "1 0 110px", minWidth: 110, borderTop: `3px solid ${sc}30`, background: COL.card, borderRadius: "8px", padding: "8px 6px", opacity: 0.5 }}>
+      const isOver = dragOver === stage;
+      if (items.length === 0 && !dragId) return <div key={stage} style={{ flex: "1 0 110px", minWidth: 110, borderTop: `3px solid ${sc}30`, background: COL.card, borderRadius: "8px", padding: "8px 6px", opacity: 0.5 }}>
         <div style={{ fontSize: "9px", color: sc, fontWeight: 600, textTransform: "uppercase", letterSpacing: ".5px" }}>{STAGE_SHORT[stage]}</div>
       </div>;
-      return <div key={stage} style={{ flex: "1 0 140px", minWidth: 140, borderTop: `3px solid ${sc}`, background: COL.card, border: `1px solid ${COL.borderSoft}`, borderRadius: "8px", padding: "8px 6px" }}>
+      return <div key={stage}
+        onDragOver={e => handleDragOver(e, stage)} onDragLeave={handleDragLeave} onDrop={e => handleDrop(e, stage)}
+        style={{ flex: "1 0 140px", minWidth: 140, borderTop: `3px solid ${sc}`, background: isOver ? sc + "12" : COL.card, border: `1px solid ${isOver ? sc + "44" : COL.borderSoft}`, borderRadius: "8px", padding: "8px 6px", transition: "background .15s, border-color .15s", minHeight: 60 }}>
         <div style={{ fontSize: "9px", color: sc, fontWeight: 600, textTransform: "uppercase", letterSpacing: ".5px", marginBottom: 6 }}>{STAGE_SHORT[stage]} <span style={{ color: COL.light }}>({items.length})</span></div>
-        {items.map(c => <div key={c.id} onClick={() => onSelect(c)} style={{ padding: "7px 8px", background: COL.bg, borderRadius: "6px", marginBottom: 3, cursor: "pointer", border: "1px solid transparent", transition: "all .12s" }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = sc + "44"; e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,.04)"; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.boxShadow = "none"; }}>
+        {items.map(c => <div key={c.id} draggable onDragStart={e => handleDragStart(e, c.id)} onDragEnd={handleDragEnd}
+          onClick={() => onSelect(c)}
+          style={{ padding: "7px 8px", background: dragId === c.id ? sc + "18" : COL.bg, borderRadius: "6px", marginBottom: 3, cursor: dragId ? "grabbing" : "grab", border: `1px solid ${dragId === c.id ? sc + "44" : "transparent"}`, transition: "all .12s", opacity: dragId === c.id ? 0.7 : 1, userSelect: "none" }}
+          onMouseEnter={e => { if (!dragId) { e.currentTarget.style.borderColor = sc + "44"; e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,.04)"; } }}
+          onMouseLeave={e => { if (!dragId) { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.boxShadow = "none"; } }}>
           <div style={{ fontSize: "12px", fontWeight: 600, color: COL.text, marginBottom: 1 }}>{c.name}</div>
-          <div style={{ fontSize: "10px", color: COL.light }}>{c.company || "—"}</div>
-          {c.nextStep && <div style={{ fontSize: "10px", color: COL.pri, marginTop: 3 }}>→ {c.nextStep}</div>}
+          <div style={{ fontSize: "10px", color: COL.light }}>{c.company || "\u2014"}</div>
+          {c.nextStep && <div style={{ fontSize: "10px", color: COL.pri, marginTop: 3 }}>\u2192 {c.nextStep}</div>}
         </div>)}
+        {isOver && items.length === 0 && <div style={{ padding: "12px 8px", textAlign: "center", fontSize: "10px", color: sc, opacity: 0.6 }}>Drop here</div>}
       </div>;
     })}
   </div>;
@@ -524,13 +567,16 @@ function Pipeline({ contacts, onSelect }) {
 // DASHBOARD
 // ═══════════════════════════════════════════════════════════
 
-function Dashboard({ data }) {
-  const { contacts: cx, interactions: ix } = data;
-  const weekAgo = Date.now() - 7 * 864e5;
-  const Stat = ({ label, value, color = COL.pri }) => <div style={{ background: COL.card, borderRadius: "10px", border: `1px solid ${COL.borderSoft}`, padding: "14px 16px", textAlign: "center" }}>
+function StatBox({ label, value, color = COL.pri }) {
+  return <div style={{ background: COL.card, borderRadius: "10px", border: `1px solid ${COL.borderSoft}`, padding: "14px 16px", textAlign: "center" }}>
     <div style={{ fontSize: "24px", fontWeight: 700, color, fontFamily: MONO }}>{value}</div>
     <div style={{ fontSize: "10px", color: COL.light, marginTop: 2 }}>{label}</div>
   </div>;
+}
+
+function Dashboard({ data }) {
+  const { contacts: cx, interactions: ix } = data;
+  const weekAgo = Date.now() - 7 * 864e5;
 
   const newW = cx.filter(c => new Date(c.createdAt) >= weekAgo).length;
   const introsReq = ix.filter(i => i.type === "Intro Request" && new Date(i.date) >= weekAgo).length;
@@ -554,27 +600,27 @@ function Dashboard({ data }) {
 
     <div style={{ fontSize: "11px", fontWeight: 600, color: COL.light, textTransform: "uppercase", letterSpacing: ".5px", marginBottom: 8 }}>Activity This Week</div>
     <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 8, marginBottom: 20 }}>
-      <Stat label="New Contacts" value={newW} />
-      <Stat label="Intros Req" value={introsReq} />
-      <Stat label="Intros Rec" value={introsRec} color={COL.green} />
-      <Stat label="Outreach Sent" value={emails} />
-      <Stat label="Meetings" value={meetings} color={COL.amber} />
+      <StatBox label="New Contacts" value={newW} />
+      <StatBox label="Intros Req" value={introsReq} />
+      <StatBox label="Intros Rec" value={introsRec} color={COL.green} />
+      <StatBox label="Outreach Sent" value={emails} />
+      <StatBox label="Meetings" value={meetings} color={COL.amber} />
     </div>
 
     <div style={{ fontSize: "11px", fontWeight: 600, color: COL.light, textTransform: "uppercase", letterSpacing: ".5px", marginBottom: 8 }}>Pipeline Health</div>
     <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 8, marginBottom: 20 }}>
-      <Stat label="Active DD" value={dd} color={COL.amber} />
-      <Stat label="Avg Days Since Touch" value={avgTouch} color={avgTouch > 7 ? COL.red : COL.green} />
-      <Stat label="Stalled >7d" value={stalled.length} color={stalled.length ? COL.red : COL.green} />
-      <Stat label="Soft Circled" value={fmt$(soft)} color={COL.green} />
-      <Stat label="Committed" value={fmt$(committed)} color={COL.green} />
+      <StatBox label="Active DD" value={dd} color={COL.amber} />
+      <StatBox label="Avg Days Since Touch" value={avgTouch} color={avgTouch > 7 ? COL.red : COL.green} />
+      <StatBox label="Stalled >7d" value={stalled.length} color={stalled.length ? COL.red : COL.green} />
+      <StatBox label="Soft Circled" value={fmt$(soft)} color={COL.green} />
+      <StatBox label="Committed" value={fmt$(committed)} color={COL.green} />
     </div>
 
     <div style={{ fontSize: "11px", fontWeight: 600, color: COL.light, textTransform: "uppercase", letterSpacing: ".5px", marginBottom: 8 }}>Capital by Confidence</div>
     <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8, marginBottom: 20 }}>
-      <Stat label="High (>70%)" value={fmt$(conf.h)} color={COL.green} />
-      <Stat label="Medium (30-70%)" value={fmt$(conf.m)} color={COL.amber} />
-      <Stat label="Low (<30%)" value={fmt$(conf.l)} color={COL.light} />
+      <StatBox label="High (>70%)" value={fmt$(conf.h)} color={COL.green} />
+      <StatBox label="Medium (30-70%)" value={fmt$(conf.m)} color={COL.amber} />
+      <StatBox label="Low (<30%)" value={fmt$(conf.l)} color={COL.light} />
     </div>
 
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
@@ -639,6 +685,18 @@ function App() {
   const updC = async f => { await api.updateContact(f); await reload(); setEditC(null); };
   const delC = async id => { if (!confirm("Delete this contact?")) return; await api.deleteContact(id); await reload(); setSelId(null); setView("list"); };
   const addI = async f => { const i = { ...f, id: uid(), createdAt: new Date().toISOString() }; await api.createInteraction(i); await reload(); };
+  const stageChange = async (contactId, newStage) => {
+    const contact = data.contacts.find(c => c.id === contactId);
+    if (!contact || contact.stage === newStage) return;
+    await api.updateContact({ ...contact, stage: newStage, stageEntryDate: td() });
+    await reload();
+  };
+  const updateNotes = async (contactId, fields) => {
+    const contact = data.contacts.find(c => c.id === contactId);
+    if (!contact) return;
+    await api.updateContact({ ...contact, ...fields });
+    await reload();
+  };
 
   const filtered = useMemo(() => {
     let l = data.contacts;
@@ -696,10 +754,10 @@ function App() {
     <div style={{ padding: "16px 20px", maxWidth: 1100, margin: "0 auto" }}>
 
       {view === "detail" && sel ?
-        <Detail contact={sel} interactions={selInts} onEdit={() => setEditC(sel)} onDelete={() => delC(sel.id)} onAddInt={addI} onBack={() => setView("list")} />
+        <Detail contact={sel} interactions={selInts} onEdit={() => setEditC(sel)} onDelete={() => delC(sel.id)} onAddInt={addI} onBack={() => setView("list")} onUpdateNotes={updateNotes} />
 
       : view === "pipeline" ?
-        <Pipeline contacts={filtered} onSelect={c => { setSelId(c.id); setView("detail"); }} />
+        <Pipeline contacts={filtered} onSelect={c => { setSelId(c.id); setView("detail"); }} onStageChange={stageChange} />
 
       : view === "dashboard" ?
         <Dashboard data={data} />
