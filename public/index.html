@@ -67,20 +67,20 @@ const api = {
 const STAGES = [
   "Target Identified","Intro Requested","Outreach Sent","Replied",
   "1st Meeting Scheduled","1st Meeting Completed","2nd / Partner Meeting",
-  "Diligence","IC / Decision Pending","Soft Circled","Committed",
+  "Diligence","IC / Decision Pending","Soft Circled","Committed","On Hold",
   "Passed","Dormant / Revisit"
 ];
 const STAGE_SHORT = {
   "Target Identified":"Target","Intro Requested":"Intro Req","Outreach Sent":"Outreach",
   "Replied":"Replied","1st Meeting Scheduled":"1st Sched","1st Meeting Completed":"1st Done",
   "2nd / Partner Meeting":"2nd Mtg","Diligence":"Diligence","IC / Decision Pending":"IC Pending",
-  "Soft Circled":"Soft Circle","Committed":"Committed","Passed":"Passed","Dormant / Revisit":"Dormant"
+  "Soft Circled":"Soft Circle","Committed":"Committed","On Hold":"On Hold","Passed":"Passed","Dormant / Revisit":"Dormant"
 };
 const STAGE_GROUP = {
   "Target Identified":"early","Intro Requested":"early","Outreach Sent":"early","Replied":"early",
   "1st Meeting Scheduled":"active","1st Meeting Completed":"active","2nd / Partner Meeting":"active",
   "Diligence":"late","IC / Decision Pending":"late","Soft Circled":"late",
-  "Committed":"closed","Passed":"closed","Dormant / Revisit":"closed"
+  "Committed":"closed","On Hold":"closed","Passed":"closed","Dormant / Revisit":"closed"
 };
 const GROUP_COLOR = {early:"#6366f1",active:"#8b5cf6",late:"#f59e0b",closed:"#10b981"};
 const STAGE_COLOR = s => GROUP_COLOR[STAGE_GROUP[s]] || "#9ca3af";
